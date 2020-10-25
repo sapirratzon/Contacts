@@ -32,4 +32,14 @@ router.put('/addNewContact', function (request, response) {
     }
 });
 
+/**
+ * Route for finding a contact by name
+ */
+router.post('/getContactByName', function (request, response) {
+    const name = request.body.name;
+    const found = contacts.find(contact => contact['name'] === name);
+    found !== undefined ? response.status(200).send(JSON.stringify(found)) :
+        response.status(400).send('No contact with this name');
+});
+
 module.exports = router;
