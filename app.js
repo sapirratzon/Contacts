@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+var contactsRouter = require('./routes/contacts');
+
+app.use(express.json());
+app.use('/contacts', contactsRouter);
 
 /**
  * Basic HTTP server that response
