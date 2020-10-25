@@ -16,12 +16,51 @@ describe("the whose-there", function () {
     });
 });
 
-
+/**
+ * Test the route for getting all the contacts.
+ */
 describe("the getAllContacts", function () {
     it("should return all the contacts", function(done) {
         request.post("/contacts/getAllContacts")
-            .expect(200, [{id: '1', name: 'Sapir Ratzon', phone: '0546680530', country: 'Israel', city: 'Ramat Gan'},
-            {id: '2', name: 'Yuval Lasri', phone: '0503953901', country: 'Israel', city: 'Ramat Gan'}], done);
+            .expect('Content-Type', /json/)
+            .expect(200);
+        done()
     });
 });
+
+
+/**
+ * Test the route for adding a new contact.
+ */
+describe("Add new contact", function () {
+    it("should add a new contact", function(done) {
+        const newContact = {
+            name: 'Israel Israeli',
+            phone: '0546680530',
+            country: 'Israel',
+            city: 'Ramat Gan'};
+        request.put("contacts/addNewContact")
+            .send(JSON.stringify(newContact))
+            .expect(200)
+            .expect("Content-Type", "text/html; charset=utf-8");
+        done()
+    });
+});
+
+
+/**
+ * Test the route for finding a contact by name
+ */
+describe("the getContactByName", function () {
+    it("should return contact by name", function(done) {
+        const contactName = { name: 'Sapir Ratzon' };
+        request.post("/contacts/getAllContacts")
+            .send(JSON.stringify(contactName))
+            .expect('Content-Type', /json/)
+            .expect(200);
+        done()
+    });
+});
+
+
 

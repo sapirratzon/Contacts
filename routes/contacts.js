@@ -33,7 +33,7 @@ router.put('/addNewContact', function (request, response) {
 });
 
 /**
- * Route for finding a contact by name
+ * Route for finding a contact by name (return the first contact with the giving name)
  */
 router.post('/getContactByName', function (request, response) {
     const name = request.body.name;
